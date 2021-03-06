@@ -35,6 +35,8 @@ public class ShooterSubsystem extends SubsystemBase {
   private final int pidIdx = 0;
   private final int timeoutMs = 0;
   private int tickCount = 0;
+
+  private double musicFreq = 0;
   
   // Purpose unclear. Put here for convenience
   // private final double nominalPercentOutForward = 0;
@@ -216,6 +218,8 @@ public class ShooterSubsystem extends SubsystemBase {
   public void startShooter() {
     m_enabled = true;
     m_shooterEndDelay = false;
+
+    musicFreq = 0;  // disable music tones
   }
 
   /** Gives the wanted RPM to a periodic function for non-preset values */
@@ -276,6 +280,10 @@ public class ShooterSubsystem extends SubsystemBase {
     m_feedMotor.set(0);
   }
 
+  /** set the music tone to the desired frequency in Hz; 0 Hz = off */
+  public void playTone(double freq) {
+    musicFreq = freq;
+  }
 
   /** Sets the developer mode */
   public void setDeveloperMode(boolean mode) {
@@ -310,6 +318,8 @@ public class ShooterSubsystem extends SubsystemBase {
       if( DriverStation.getInstance().isAutonomous() ){
         USBLogging.info("Target = " + m_rpm + "||RPM = " + (int) getShooterRPM());
       }
+    } else if (musicFreq > 0) {
+      m_shootMotor.set(ControlMode.MusicTone, musicFreq);
     }else{
       m_shootMotor.set(0);
     }
