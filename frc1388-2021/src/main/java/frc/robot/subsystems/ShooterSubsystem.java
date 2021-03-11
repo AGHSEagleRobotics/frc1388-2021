@@ -218,8 +218,6 @@ public class ShooterSubsystem extends SubsystemBase {
   public void startShooter() {
     m_enabled = true;
     m_shooterEndDelay = false;
-
-    musicFreq = 0;  // disable music tones
   }
 
   /** Gives the wanted RPM to a periodic function for non-preset values */
@@ -318,6 +316,8 @@ public class ShooterSubsystem extends SubsystemBase {
       if( DriverStation.getInstance().isAutonomous() ){
         USBLogging.info("Target = " + m_rpm + "||RPM = " + (int) getShooterRPM());
       }
+
+      musicFreq = 0;  // cancel music tones
     } else if (musicFreq > 0) {
       m_shootMotor.set(ControlMode.MusicTone, musicFreq);
     }else{

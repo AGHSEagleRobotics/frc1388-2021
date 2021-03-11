@@ -29,7 +29,7 @@ import frc.robot.commands.MultiShot;
 import frc.robot.commands.Trolley;
 import frc.robot.commands.UnjamIntake;
 import frc.robot.commands.DeveloperMode;
-import frc.robot.commands.MusicTest;
+import frc.robot.commands.MusicStartup;
 
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveTrain;
@@ -86,7 +86,8 @@ public class RobotContainer {
   private RetractIntake m_retractIntake;
   private DeveloperMode m_developerMode;
   private UnjamIntake m_unjamIntake;
-  private MusicTest m_musicTest;
+
+  public static MusicStartup m_startupTone;
 
   // components 
   public static XboxController driveController = new XboxController(Constants.USB_driveController);
@@ -119,7 +120,7 @@ public class RobotContainer {
     m_deployIntake = new DeployIntake(m_intakeSubsystem, m_magazineSubsystem);
     m_retractIntake = new RetractIntake(m_intakeSubsystem, m_magazineSubsystem);
     m_unjamIntake = new UnjamIntake(m_intakeSubsystem);
-    m_musicTest = new MusicTest(m_shooterSubsystem);
+    m_startupTone = new MusicStartup(m_shooterSubsystem);
 
     // m_autonMove = new AutonMove(
     //     m_driveTrain,                     // dependecy
@@ -237,9 +238,6 @@ public class RobotContainer {
     new POVButton( driveController, Dpad.kDown.getAngle())
         .whenHeld(m_spinnerArmDown);
     
-    new POVButton(driveController, Dpad.kLeft.getAngle())
-        .whenPressed(m_musicTest);
-
     // toggle Rotational Control on/off
     new JoystickButton(driveController, XboxController.Button.kX.value)
         .toggleWhenPressed(m_rotationControlCmd);

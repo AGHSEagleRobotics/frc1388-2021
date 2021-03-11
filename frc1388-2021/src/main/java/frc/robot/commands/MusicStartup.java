@@ -8,15 +8,16 @@ import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class MusicTest extends CommandBase {
+public class MusicStartup extends CommandBase {
 
   private ShooterSubsystem m_shooterSubsystem;
 
   private Timer m_timer = new Timer();
   private boolean done = false;
+  private int i = 0;
 
   /** Creates a new MusicTest. */
-  public MusicTest(ShooterSubsystem shooterSubsystem) {
+  public MusicStartup(ShooterSubsystem shooterSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_shooterSubsystem = shooterSubsystem;
   }
@@ -26,21 +27,16 @@ public class MusicTest extends CommandBase {
   public void initialize() {
     m_timer.reset();
     m_timer.start();
+    done = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_timer.get() < 2) {
-      m_shooterSubsystem.playTone(250);
-    } else if (m_timer.get() < 4) {
-      m_shooterSubsystem.playTone(375);
-    } else if (m_timer.get() < 6) {
-      m_shooterSubsystem.playTone(500);
-    // } else if (m_timer.get() < 8) {
-    //   m_shooterSubsystem.playTone(750);
-    // } else if (m_timer.get() < 10) {
-    //   m_shooterSubsystem.playTone(1000);
+    if (m_timer.get() < 2.0) {
+      if ((i % 2) == 0) m_shooterSubsystem.playTone(500);
+      else              m_shooterSubsystem.playTone(750);
+      i++;
     } else {
       done = true;
     }
@@ -51,7 +47,6 @@ public class MusicTest extends CommandBase {
   public void end(boolean interrupted) {
     m_shooterSubsystem.playTone(0);
     m_timer.stop();
-    m_timer.reset();
   }
 
   // Returns true when the command should end.

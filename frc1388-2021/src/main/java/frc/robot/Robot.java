@@ -119,6 +119,9 @@ public class Robot extends TimedRobot {
     } else {
       USBLogging.info("FMS not connected");
     }
+
+    // play startup tone
+    RobotContainer.m_startupTone.schedule();
     
     m_autonomousCommand = m_robotContainer.getAutonCommand();
     // schedule the autonomous command (example)
@@ -138,6 +141,9 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     USBLogging.info("########  Teleop enabled");
 
+    // play startup tone
+    RobotContainer.m_startupTone.schedule();
+    
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
