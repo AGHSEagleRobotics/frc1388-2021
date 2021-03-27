@@ -65,7 +65,7 @@ public class Drive extends CommandBase {
 
     // while held the drive left bumper scaling the rotational speed
     if( RobotContainer.getDriveLeftBumber() ){
-      m_compDashboard.setLimeLightLEDOn();
+//      m_compDashboard.setLimeLightLEDOn();
       rightXAxis *= FINE_TUNE_TURN;
     }else{
       m_compDashboard.setLimeLightDriveCamMode();
