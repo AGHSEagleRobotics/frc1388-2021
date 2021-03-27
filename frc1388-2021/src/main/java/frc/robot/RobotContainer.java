@@ -175,9 +175,9 @@ public class RobotContainer {
         // Multi Shot
     new JoystickButton(driveController, XboxController.Button.kBumperRight.value)
         .whenHeld(m_multiShot);
-    new JoystickButton(opController, XboxController.Button.kY.value)
+    new JoystickButton(driveController, XboxController.Button.kY.value)
        .whenPressed(() -> m_shooterSubsystem.presetRPMUp());
-    new JoystickButton(opController, XboxController.Button.kX.value)
+    new JoystickButton(driveController, XboxController.Button.kX.value)
        .whenPressed(() -> m_shooterSubsystem.presetRPMDown());
     //     // Developer Mode
     // new Button(() -> driveController.getTriggerAxis(Hand.kLeft) > 0)
@@ -235,10 +235,10 @@ public class RobotContainer {
         .whenHeld(m_spinnerArmDown);
     
     // toggle Rotational Control on/off
-    new JoystickButton(driveController, XboxController.Button.kX.value)
+    new JoystickButton(opController, XboxController.Button.kX.value)
         .toggleWhenPressed(m_rotationControlCmd);
     // toggle Positional Control on/off
-    new JoystickButton(driveController, XboxController.Button.kY.value)
+    new JoystickButton(opController, XboxController.Button.kY.value)
         .toggleWhenPressed(m_positionControlCmd);
 
 
