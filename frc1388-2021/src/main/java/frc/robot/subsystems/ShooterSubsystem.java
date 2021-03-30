@@ -79,58 +79,12 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterRpmFromFarTrench1,
   };
 
-
-  // Values for the second array of presets used for competition
-  private final double shooterRpmFromStartingLine2 = 1000;
-  private final double shooterRpmFromNearTrench2 = 2000;
-  private final double shooterRpmFromFarTrench2 = 3000;
-  
-  // Second array of presets intended for use in competition
+  // Second array of presets intended for use in At Home competition
   private final double[] presetList2 = {
-    shooterRpmFromStartingLine2,
-    shooterRpmFromNearTrench2,
-    shooterRpmFromFarTrench2,
+    4000, 4200, 4400, 4600, 4800,
+    5000, 5200, 5400, 5600, 5800,
+    6000
   };
-
-
-  // Values for the third array of presets used for competition
-  private final double shooterRpmFromStartingLine3 = 1000;
-  private final double shooterRpmFromNearTrench3 = 2000;
-  private final double shooterRpmFromFarTrench3 = 3000;
-  
-  // Third array of presets intended for use in competition
-  private final double[] presetList3 = {
-    shooterRpmFromStartingLine3,
-    shooterRpmFromNearTrench3,
-    shooterRpmFromFarTrench3,
-  };
-
-
-  // Values for the fourth array of presets used for competition
-  private final double shooterRpmFromStartingLine4 = 1000;
-  private final double shooterRpmFromNearTrench4 = 2000;
-  private final double shooterRpmFromFarTrench4 = 3000;
-  
-  // Fourth array of presets intended for use in competition
-  private final double[] presetList4 = {
-    shooterRpmFromStartingLine4,
-    shooterRpmFromNearTrench4,
-    shooterRpmFromFarTrench4,
-  };
-
-
-  // Values for the fifth array of presets used for competition
-  private final double shooterRpmFromStartingLine5 = 1000;
-  private final double shooterRpmFromNearTrench5 = 2000;
-  private final double shooterRpmFromFarTrench5 = 3000;
-  
-  // Fifth array of presets intended for use in competition
-  private final double[] presetList5 = {
-    shooterRpmFromStartingLine5,
-    shooterRpmFromNearTrench5,
-    shooterRpmFromFarTrench5,
-  };
-
 
 
   // TESTING: Array used for RPM testing, hence the "developer" part of the name
@@ -199,7 +153,7 @@ public class ShooterSubsystem extends SubsystemBase {
      // USBLogging.warning("SHOOTER DEVELOPMENT MODE!");
     }
     else {
-      m_rpmPresetList = presetList1; // TODO: Change to reflect current shooter configuration
+      m_rpmPresetList = presetList2; // TODO: Change to reflect current shooter configuration
     }
 
     m_presetIndex = m_rpmPresetList.length - 1;
