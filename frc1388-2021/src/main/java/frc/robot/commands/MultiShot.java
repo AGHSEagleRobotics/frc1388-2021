@@ -53,18 +53,18 @@ public class MultiShot extends CommandBase {
       m_shooterSubsystem.usePresetRPM();
     }
     //Starts the shooter, and a timer to let it get up to speed
-    m_magazineSubsystem.startShooting();
     m_shooterSubsystem.startShooter();
     m_spinUpTimer.start();
     m_shooterSubsystem.startEndDelayTimer();
   }
-
+  
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     // Once the time needed for the shooter to get to the RPM is reached,
     //balls will be fed by the feeder into the shooter, timer is stopped
     if (m_spinUpTimer.get() > k_shooterSpinUpTime) {
+      m_magazineSubsystem.startShooting();
       m_shooterSubsystem.setFeeder(1);
       m_spinUpTimer.stop();
       m_spinUpTimer.reset();

@@ -39,7 +39,7 @@ public class MagazineSubsystem extends SubsystemBase {
   private boolean m_magazineIsFull = false;
   
   // Periodic Variables
-  private final double k_magazineShootSpeed = 1.0;
+  private final double k_magazineShootSpeed = 0.5;
   private final double k_magazineEjectSpeed = -1.0;
   private final double k_magazineIntakeSpeed = 0.75;
 

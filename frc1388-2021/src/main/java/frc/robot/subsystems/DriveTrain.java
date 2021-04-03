@@ -97,7 +97,7 @@ public class DriveTrain extends SubsystemBase {
     differentialDrive.setSafetyEnabled(true);
     differentialDrive.setExpiration(0.1);
     differentialDrive.setMaxOutput(1.0);
-    differentialDrive.setDeadband( 0.2 );
+    differentialDrive.setDeadband( 0.1 );
   }
 
   public void neutralBrake() {
