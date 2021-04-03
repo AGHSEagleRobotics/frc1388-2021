@@ -104,13 +104,15 @@ public class CompDashBoard {
     private NetworkTableEntry distanceFromTarget;
 
     // Cam
+    private final int LIMELIGHT_LED_OFF = 1;
+    private final int LIMELIGHT_LED_ON = 3;
     private UsbCamera m_cameraIntake;
     private UsbCamera m_cameraClimber;
     private UsbCamera m_cameraColor;
     private UsbCamera m_cameraShooter;
     private HttpCamera m_limeLight;
     private int m_currVideoSourceIndex = 0;
-    private int m_currCamMode = 1;
+    private int m_currCamLEDMode = LIMELIGHT_LED_OFF;
     private int m_currProcessMode = 1;
     private VideoSink m_videoSink;
     private VideoSource[] m_videoSources;
@@ -348,44 +350,48 @@ public class CompDashBoard {
     }
 
     public void toggleLimelightLED(){
-        if( m_currCamMode == 1 ){
-            m_currCamMode = 3;
+        if( m_currCamLEDMode == LIMELIGHT_LED_OFF ){
+            m_currCamLEDMode = LIMELIGHT_LED_ON;
             m_currProcessMode = 1;
             ledOn = true;
         }else{
-            m_currCamMode = 1;
+            m_currCamLEDMode = LIMELIGHT_LED_OFF;
             m_currProcessMode = 0;
             ledOn = false;
         }
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(m_currCamMode);
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(m_currCamLEDMode);
     }
 
     public void switchVideoSource() {
         if( switchVideoOn ){
+            // try{
+            //     if( m_videoSources[m_currVideoSourceIndex].equals(m_limeLight) && m_currCamLEDMode != LIMELIGHT_LED_OFF){
+            //         m_currCamLEDMode = LIMELIGHT_LED_OFF;
+            //     }
+            //     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(m_currCamLEDMode);
+            // }catch( Exception e){}
+
             m_currVideoSourceIndex = (m_currVideoSourceIndex + 1) % m_videoSources.length;
             if( m_videoSources[m_currVideoSourceIndex] != null ){
                 m_videoSink.setSource(m_videoSources[m_currVideoSourceIndex]); 
             }
-            int nextVideoSource = ( m_currVideoSourceIndex + 1 ) % m_videoSources.length;
-            try{
-                if( m_videoSources[m_currVideoSourceIndex].equals(m_limeLight) && m_currCamMode != 3){
-                    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
-                    m_currCamMode = 3;
-                }else if(!m_videoSources[nextVideoSource].equals(m_limeLight) && m_currCamMode != 1 ){
-                    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
-                    m_currCamMode = 1;
-                }
-            }catch( Exception e){}
+
+            // try{
+            //     if( m_videoSources[m_currVideoSourceIndex].equals(m_limeLight) && m_currCamLEDMode != LIMELIGHT_LED_ON){
+            //         m_currCamLEDMode = LIMELIGHT_LED_ON;
+            //     }
+            //     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(m_currCamLEDMode);
+            // }catch( Exception e){}
             // complexWidgetCam.withProperties(Map.of( "Rotation", "None")); 
         }
     }
 
     public void setLimeLightLEDOn(){
-        m_currCamMode = 3;
+        m_currCamLEDMode = LIMELIGHT_LED_ON;
         m_currProcessMode = 0;
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(m_currProcessMode);
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(m_currCamMode);
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(m_currCamLEDMode);
     }
 
     public void setLimeLightDriveCamMode(){
